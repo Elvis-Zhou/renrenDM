@@ -18,9 +18,8 @@ outputfilename1=savepath+"status%s.txt" % time.strftime("%y-%m-%d-%H",time.local
 outputfilename2=savepath+"rawstatus%s.txt" % time.strftime("%y-%m-%d-%H",time.localtime(time.time()))
 #out=open("hotstatus.txt","a")
 
-#out=open(outputfilename1,"a")
-#out2=open("wordlist.txt","a")
-#out3=open(outputfilename2,"a")
+out=open(outputfilename1,"a")
+out2=open(outputfilename2,"a")
 class renren():
     def __init__(self,email,password):
         self.soup=""
@@ -28,7 +27,8 @@ class renren():
         self.dic={}
         self.stauts=[]
         #self.url="http://status.renren.com/GetHotDoing.do?word=%E4%BF%9D%E9%92%93%E4%BA%BA%E5%A3%AB%E7%99%BB%E5%B2%9B%E6%88%90%E5%8A%9F"
-        self.url='http://www.renren.com/PLogin.do'
+        self.commonpageurl1='http://page.renren.com/assemble/portal/2'
+        self.commonpageurl2='http://page.renren.com/friend/allpages'
         #self.url2="http://www.renren.com/282566272"
         self.url2="http://guide.renren.com/guide?reurl=%2F%2Fstatus%2Fstatus%3Fid%3D282566272#//status/status?id=282566272"
         self.url2="http://status.renren.com/GetSomeomeDoingList.do?userId=253810474&curpage=0"
@@ -43,7 +43,7 @@ class renren():
         #把content从list改成set以去重
         #self.keyword="保钓人士登岛成功"
         self.charset="ascii"
-        self.cookie="anonymid=h2k3dem91ah9s0; _r01_=1; mop_uniq_ckid=127.0.0.1_1339338517_232586224; l4pager=0; XNESSESSIONID=4b366edd7d09; _urm_282566272=45; _urm_348398946=45; depovince=JS; __utma=151146938.1806053947.1345432990.1345448438.1345558336.3; __utmc=151146938; __utmz=151146938.1345558336.3.3.utmcsr=guide.renren.com|utmccn=(referral)|utmcmd=referral|utmcct=/guide; transfer=2ad28691ca7d9b9770209fb86f6c48082; at=1; vip=1; jebecookies=db4be8c5-9059-4ba4-ad7e-6effba65d472|||||; ick_login=9c57e046-4539-42e6-93c6-834903ba822b; idc=tel; _de=F0FE108A947A3E6B27329D0BA75CD0BC34DF20B0B3AA6FF7; p=a9de570e422f9a65d4e1cb2911cf185c6; ap=348398946; t=8ea852e4d2f94b9a3118812288a42b5a6; societyguester=8ea852e4d2f94b9a3118812288a42b5a6; id=348398946; xnsid=ac9dc4c4; feedType=348398946_hot; loginfrom=null"
+        self.cookie="anonymid=h2k3dem91ah9s0; _r01_=1; mop_uniq_ckid=127.0.0.1_1339338517_232586224; l4pager=0; XNESSESSIONID=4b366edd7d09; _urm_282566272=45; _urm_348398946=45; __utma=151146938.1806053947.1345432990.1345448438.1345558336.3; __utmc=151146938; __utmz=151146938.1345558336.3.3.utmcsr=guide.renren.com|utmccn=(referral)|utmcmd=referral|utmcct=/guide; jebecookies=db4be8c5-9059-4ba4-ad7e-6effba65d472|||||; ick_login=9c57e046-4539-42e6-93c6-834903ba822b; _de=F0FE108A947A3E6B27329D0BA75CD0BC34DF20B0B3AA6FF7; hp=601231122%2Chttp%3A%2F%2Fhdn.xnimg.cn%2Fphotos%2Fhdn221%2F20120609%2F0845%2Fh_tiny_kQSi_1b6b000005011375.jpg%2C%E6%AF%8F%E5%A4%A9%E9%98%85%E8%AF%BB%E4%B8%80%E5%B0%8F%E6%97%B6%3B601369283%2Chttp%3A%2F%2Fhdn.xnimg.cn%2Fphotos%2Fhdn221%2F20120427%2F2145%2Fh_tiny_lCs8_5f4c00069aa22f75.jpg%2C%E7%8E%8B%E6%9D%BE%E4%B9%89%3B600493224%2Chttp%3A%2F%2Fhdn.xnimg.cn%2Fphotos%2Fhdn321%2F20120705%2F1115%2Fh_tiny_Mcbq_673d0000083f1376.jpg%2C%E8%8C%83%E5%86%B0%E5%86%B0; transfer=2ad28691ca7d9b9770209fb86f6c48082; p=459069938a37652ee7fea3a291d7a6a02; ap=282566272; t=90ba99376ca249dbd286e5e46ded842a2; societyguester=90ba99376ca249dbd286e5e46ded842a2; id=282566272; xnsid=97f34a28; loginfrom=null; idc=tel; vip=1"
         try:
             cookie=cookielib.CookieJar()
             cookieProc=urllib2.HTTPCookieProcessor(cookie)
@@ -299,6 +299,7 @@ if __name__ == "__main__":
     #url="http://status.renren.com/GetHotDoing.do?word="+todaykeyword
     #url2="http://status.renren.com/GetSomeomeDoingList.do?userId=253810474&curpage=0"
     id="253810474"
+    id="699146540"
     #renrendm.dealallwords(todaykeyword)
     #renrendm.getpage(todaykeyword)
     #renrendm.dealwordlist()

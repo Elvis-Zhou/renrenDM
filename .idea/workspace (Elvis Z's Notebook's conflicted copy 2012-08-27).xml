@@ -4,12 +4,7 @@
     <bookmark url="file://$PROJECT_DIR$/DMhotlist.py" line="135" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8dc99fbc-cd9f-4f1a-8fbd-e3598f2f776a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DMhotpage.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DMCommonPage.py" afterPath="$PROJECT_DIR$/DMCommonPage.py" />
-    </list>
+    <list default="true" id="8dc99fbc-cd9f-4f1a-8fbd-e3598f2f776a" name="Default" comment="" />
     <ignored path="renrenDM.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -42,7 +37,7 @@
       <file leaf-file-name="DMCommonPage.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/DMCommonPage.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="0" selection-start="478" selection-end="502" vertical-scroll-proportion="0.0">
+            <state line="305" column="0" selection-start="11820" selection-end="11820" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -60,10 +55,8 @@
       <file leaf-file-name="DMhotpage.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/DMhotpage.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="147" column="46" selection-start="5939" selection-end="5939" vertical-scroll-proportion="1.8387097">
-              <folding>
-                <element signature="e#41#83#0" expanded="true" />
-              </folding>
+            <state line="284" column="24" selection-start="10731" selection-end="10731" vertical-scroll-proportion="0.53846157">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -85,15 +78,14 @@
         <option value="$PROJECT_DIR$/DMhotlist.py" />
         <option value="$PROJECT_DIR$/DMCommonPage.py" />
         <option value="$PROJECT_DIR$/findthechain.py" />
-        <option value="$PROJECT_DIR$/DMhotpage.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
+    <option name="x" value="69" />
     <option name="y" value="-8" />
-    <option name="width" value="1296" />
-    <option name="height" value="958" />
+    <option name="width" value="1305" />
+    <option name="height" value="784" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -169,7 +161,7 @@
       <PyConsoleSettings />
     </option>
   </component>
-  <component name="RunManager" selected="Python.DMhotpage">
+  <component name="RunManager" selected="Python.findthechain">
     <configuration default="false" name="DMhotlist" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -244,26 +236,6 @@
       <ConfigurationWrapper RunnerId="PythonRunner" />
       <method />
     </configuration>
-    <configuration default="false" name="DMhotpage" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <module name="renrenDM" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DMhotpage.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="MULTIPROCESS" value="false" />
-      <RunnerSettings RunnerId="PyDebugRunner" />
-      <RunnerSettings RunnerId="PythonRunner" />
-      <ConfigurationWrapper RunnerId="PyDebugRunner" />
-      <ConfigurationWrapper RunnerId="PythonRunner" />
-      <method />
-    </configuration>
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -335,13 +307,12 @@
       <ConfigurationWrapper RunnerId="PythonRunner" />
       <method />
     </configuration>
-    <list size="6">
+    <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.DMhotlist" />
       <item index="1" class="java.lang.String" itemvalue="Python.findthechain" />
       <item index="2" class="java.lang.String" itemvalue="Python.renrenlogin" />
       <item index="3" class="java.lang.String" itemvalue="Python.DMCommonPage" />
-      <item index="4" class="java.lang.String" itemvalue="Python.DMhotpage" />
-      <item index="5" class="java.lang.String" itemvalue="Python.renrenDM" />
+      <item index="4" class="java.lang.String" itemvalue="Python.renrenDM" />
     </list>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
@@ -372,18 +343,18 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1296" height="958" extended-state="6" />
-    <editor active="false" />
+    <frame x="69" y="-8" width="1305" height="784" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31604537" sideWeight="0.7889447" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3982412" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30490747" sideWeight="0.63461536" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39903846" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.41582915" sideWeight="0.50405186" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21105528" sideWeight="0.49027553" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3653846" sideWeight="0.49027553" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -486,29 +457,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/findthechain.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="0" selection-start="84" selection-end="84" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/DMCommonPage.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="0" selection-start="478" selection-end="502" vertical-scroll-proportion="0.0" />
+        <state line="305" column="0" selection-start="11820" selection-end="11820" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://D:/Python27/Lib/site-packages/bs4/element.py">
+    <entry file="file://$PROJECT_DIR$/findthechain.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1127" column="31" selection-start="40976" selection-end="40976" vertical-scroll-proportion="0.0">
+        <state line="3" column="0" selection-start="84" selection-end="84" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/DMhotpage.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="147" column="46" selection-start="5939" selection-end="5939" vertical-scroll-proportion="1.8387097">
-          <folding>
-            <element signature="e#41#83#0" expanded="true" />
-          </folding>
+        <state line="284" column="24" selection-start="10731" selection-end="10731" vertical-scroll-proportion="0.53846157">
+          <folding />
         </state>
       </provider>
     </entry>

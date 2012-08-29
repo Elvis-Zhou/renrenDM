@@ -13,16 +13,16 @@ count=0
 urllib2.socket.setdefaulttimeout(30)
 #input=open("hotstatus.txt","r")
 savepath="./hotpage/"
-outputfilename1=savepath+"finance%s.txt" % time.strftime("%y-%m-%d ",time.localtime(time.time()))
-outputfilename2=savepath+"rawfinance%s.txt" % time.strftime("%y-%m-%d",time.localtime(time.time()))
+outputfilename1=savepath+"renren%s.txt" % time.strftime("%y-%m-%d ",time.localtime(time.time()))
+outputfilename2=savepath+"renrenstatus%s.txt" % time.strftime("%y-%m-%d",time.localtime(time.time()))
 #out=open("hotstatus.txt","a")
 
 out=open(outputfilename1,"a")
 out2=open(outputfilename2,"a")
 out3=open("comonpages.txt","a")
-out4=open("pagelist.txt","r")
+in1=open("pagelist.txt","r")
 
-
+lock1=threading.Lock()
 class renren():
     def __init__(self):
         self.soup=""
@@ -40,7 +40,7 @@ class renren():
         self.htmlfile=""
         self.requset=""
         self.queue=Queue()
-        self.out_queue=Queue(maxthreads)
+        self.out_queue=Queue()
         #self.q="金融"
 
         self.content=set()
@@ -56,30 +56,21 @@ class renren():
             #else:
         self.opener=urllib2.build_opener(cookieProc)
         urllib2.install_opener(self.opener)
-    def generatepurl(self):
+    def generatepUrl(self,max=1000):
+        i=0
+        for line in in1:
+            self.queue.put(line)
+            i+=1
+            if i>max:
+                break
 
+    def showUrlpage(self):
+        url=self.queue.get().strip()+"/fdoing"
+        print url
+        htmlfile=self.getpage(url)
+        return htmlfile
 
-        self.htmlfile=urllib2.urlopen("http://page.renren.com/eason/fdoing").read()
-        soup=BeautifulSoup(self.htmlfile,"lxml")
-        rawurl="http://page.renren.com"
-        self.status=soup.find_all("h3")
-
-        for p in self.status:
-            print p.text.strip()
-
-        self.quesitonurls=soup.find_all("a",{"href":re.compile(r'^/\d*/.*',re.DOTALL)})
-
-        for p in self.quesitonurls:
-            self.pageurls.append(rawurl+p["href"])
-
-        rawhtml=urllib2.urlopen(h).read()
-        soup=BeautifulSoup(rawhtml,"lxml")
-        allcomments=soup.find_all("p",{"class":"content"})
-
-        for p in allcomments:
-            print p.text.strip()
-
-    def showurls(self,htmlfile=""):
+    def tempgeturls(self,htmlfile=""):
         #testurl="http://www.zhihu.com/search/question?q=%E9%87%91%E8%9E%8D&type1=question&page=37"
         #self.htmlfile=self.getpage(testurl)
         if htmlfile:
@@ -98,24 +89,20 @@ class renren():
             self.pageurls.append(tt)
             #写入文件
             out3.write(t+"\n"+tt+"\n")
-            out4.write(tt+"\n")
+            #out4.write(tt+"\n")
             print t
             print tt
         #print self.quesitons
         return self.pageurls
 
     def getpage(self,url):
-        #self.keyword=keyword
         if url:
             self.url=url
         self.requset=urllib2.Request(self.url)
-        #self.requset.add_header("Cookie",self.cookie)
-        #self.requset.add_header("Host","www.renren.com")
-        #self.requset.add_header("Referer",self.cururl)
         self.requset.add_header("User-Agent","Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/21.0.1180.75 Safari/537.1")
         i=0
         t=0
-        while t==0:
+        while not t:
             try:
                 self.htmlfile=urllib2.urlopen(self.requset).read()
                 if  self.htmlfile:
@@ -127,107 +114,48 @@ class renren():
             except :
                 i+=1
             if i>=5:break
-
         #print self.htmlfile
         return self.htmlfile
 
-    def dealcontent(self,htmlfile="",answercount=3):
-        if htmlfile:
-            self.htmlfile=htmlfile
-        self.htmlfile=urllib2.urlopen("http://page.renren.com/eason/fdoing").read()
-        soup=BeautifulSoup(self.htmlfile,"lxml")
-        rawurl="http://page.renren.com"
-        self.status=soup.find_all("h3")
+    def dealcontent(self):
+        #if htmlfile:
+            #self.htmlfile=htmlfile
+        while 1:
+            htmlfile=self.showUrlpage()
+            #self.htmlfile=urllib2.urlopen("http://page.renren.com/eason/fdoing").read()
+            soup=BeautifulSoup(htmlfile,"lxml")
+            rawurl="http://page.renren.com"
+            #self.status=soup.find_all("h3")
+            #for p in self.status:
+               #print p.text.strip()
+            quesitonurls=soup.find_all("a",{"href":re.compile(r'^/\d*/.*',re.DOTALL)})
+            for p in quesitonurls:
+                self.out_queue.put(rawurl+p["href"])
+            self.queue.task_done()
+        #return 1
 
-        for p in self.status:
-           print p.text.strip()
-
-        self.quesitonurls=soup.find_all("a",{"href":re.compile(r'^/\d*/.*',re.DOTALL)})
-
-        for p in self.quesitonurls:
-            self.pageurls.append(rawurl+p["href"])
-
-        rawhtml=urllib2.urlopen(h).read()
-        soup=BeautifulSoup(rawhtml,"lxml")
-        allcomments=soup.find_all("p",{"class":"content"})
-
-        for p in allcomments:
-            print p.text.strip()
-        """
-        #print soup
-        self.question=soup.title.text[:-4]
-        #print self.question
-        answers=soup.find_all("div",{"class":"xajw xod"})
-        keywords=soup.find_all("a",{"class":"xyk"})
-        self.keyword=""
-        for k in keywords:
-            self.keyword+=k.text.strip()+" "
-        print "关键词是: "+self.keyword
-        #print answers
-        if answers:
-            self.answer=answers[0].text
-        else:
-            self.answer=u"这个问题没有一个好的答案"
-        if answers:
-            i=0
-            for ans in answers:
-                self.answers.append(ans.text)
-                i+=1
-                if i>=answercount:break
-
-        #print self.answer
-        self.writetoaiml()
-        self.writetorawfile()
-        self.answers=[]
-        time.sleep(random.randint(1,3))
-        self.questionurls=[]
-        self.answers=[]
-
-        html=open("test.html")
-        htmlfile=""
-        for i in html:
-            htmlfile+=i
-        soup=BeautifulSoup(htmlfile,"lxml")
-        question=soup.title.text[:-4]
-
-        answers=soup.find("div",{"class":"xajw xod"})
-        print question
-        print answers.text
-        """
-        return 1
-
-    def dealquestions(self,startpage=31,maxpage=38,keyword="金融",answercount=3):
-        for page in range(startpage,maxpage+1):
-            print "now at page:"+str(page)
-            self.quesitonurls=[]
-            self.quesitons=[]
-            url=self.generatepurl(keyword,page)
+    def dealcomments(self):
+        while 1:
+            url=self.out_queue.get()
+            print url
             htmlfile=self.getpage(url)
             soup=BeautifulSoup(htmlfile,"lxml")
-            while soup.find_all(text="请输入图中的数字："):
-                print "\a"*10,
-                print url+" 知乎要求输入验证码，请打开知乎输入"
-                #os.system("cmd ./beep.bat")
-                time.sleep(20)
-                #这个是获取问题列表URL的时候
-                htmlfile=self.getpage(url)
-                soup=BeautifulSoup(htmlfile,"lxml")
-
-            self.showurls(htmlfile)
-            self.dealcontent(answercount=answercount)
-
-            for q in self.quesitons:
-                out3.write(q+"\n")
-            out3.flush()
-            self.quesitons=[]
-            print "sleep half a minute~~~"
-            time.sleep(random.randint(25,35))
-            #if len(htmlfile)<=12200:
-            #print "finish at page: "+str(page)
-            #break
-
-
-
+            allcomments=soup.find_all("p",{"class":"content"})
+            try:
+                status=soup.find("h3").text.strip()
+            except AttributeError:
+                status=soup.find("span",{"class":"status-content"}).text.strip()
+            except BaseException:
+                status="状态丢失"
+            commentlist=[]
+            for comment in allcomments:
+                x=comment.text.strip()
+                commentlist.append(x)
+                #print x
+            lock1.acquire()
+            self.writetoxml(status,commentlist)
+            lock1.release()
+            self.out_queue.task_done()
 
     def writetoaiml (self):
         global out,count
@@ -276,6 +204,43 @@ class renren():
         print count
         #self.content=set()
 
+    def writetoxml (self,status,list):
+        if not list:
+            return
+        global out,count
+        out.write("  <category>\n")
+        out.write("    <text>")
+        words=status
+        if not words.strip():
+            return
+        words=words.replace("&","&amp;")
+        words=words.replace("<","&lt;")
+        words=words.replace(">","&gt;")
+        words=words.replace("'","&apos;")
+        words=words.replace('"',"&quot;")
+        out.write(words)
+        out.write("</text>\n")
+        out.write("    <commments>\n")
+        print status
+        for comment in list:
+            out.write("      <comment1>")
+            print comment.strip()
+            #out.write("        <li>")
+            words=comment.strip().replace("&","&amp;")
+            words=words.replace("<","&lt;")
+            words=words.replace(">","&gt;")
+            words=words.replace("'","&apos;")
+            words=words.replace('"',"&quot;")
+            out.write(words)
+            out.write("</comment1>\n")
+            #count += 1
+            #out.write("      </random>\n")
+        out.write("    </text>\n")
+        out.write("  </category>\n")
+        out.flush()
+        count += 1
+        print count
+        #self.content=set()
 
     def writetorawfile(self):
         if not self.question.strip():
@@ -293,7 +258,6 @@ class renren():
         out2.flush()
 
     def findhtmlurls(self,filename="mosthot.html"):
-
         file=open(filename,"r")
         htmlfile=""
         for line in file:
@@ -303,41 +267,13 @@ class renren():
         #print x
         for aa in x:
             print >>out3,aa.text
-
             t=aa.find("a")["href"]
             try:
                 t=re.findall(r"http://page.renren.com/\d*",t)[0]
                 print >>out3,t
             except:
                 pass
-    """
-    def findurls(self,nowurl):
-        #nowurl=url%x
-        self.out_queue.get()
-        self.getpage(nowurl)
-        print "now finding at :"+nowurl
-        self.showurls()
-        out3.flush()
-        out4.flush()
-        self.out_queue.task_done()
-    def findCommonPageUrls(self,start=0,end=1000):
-        url="http://page.renren.com/friend/allpages?curpage=%s&t=0"
 
-        for x in range(start,end+1):
-            nowurl=url%x
-            #t=threading.Thread(target=self.findurls(nowurl))
-            self.queue.put(nowurl)
-        print "finish put urls"
-        for x in range(start,end+1):
-            url=self.queue.get()
-            print url
-            t=threading.Thread(target=self.findurls(url))
-            #self.out_queue.put(t,1)
-            #t.start()
-            #self.out_queue.join()
-
-        #self.out_queue.join()
-        """
     def findCommonPageUrls(self,start=0,end=1000):
         url="http://page.renren.com/friend/allpages?curpage=%s&t=0"
         for x in range(start,end+1):
@@ -346,7 +282,33 @@ class renren():
             print "now finding at :"+nowurl
             self.showurls()
             out3.flush()
-            out4.flush()
+            #out4.flush()
+    def p(self):
+        print "1"
+
+    def main(self):
+        #初始化要抓取的页面列表
+        url=self.generatepUrl(50000)
+        print "begin"
+        #self.dealcontent()
+        #做100个线程，用来处理放在out_queue里面的状态队列，并获得状态和回复，写入文件。
+        for j in range(0,50):
+            t=threading.Thread(target=self.dealcomments)
+            t.setDaemon(True)
+            t.start()
+
+        #做10个线程池，用来做打开状态主页，获取状态链接放入out_queue中
+        for i in range(0,10):
+            t=threading.Thread(target=self.dealcontent())
+            t.setDaemon(True)
+            t.start()
+
+
+        self.queue.join()
+        self.out_queue.join()
+
+        print "finish all"
+
 
 class downpage(threading.Thread):
     def __init__(self,queue,out_queue):
@@ -384,15 +346,15 @@ class dealpage(threading.Thread):
         while True:
             htmlfile=self.out_queue.get()
             self.renrendm
-
             self.out_queue.task_done()
+
 
 if __name__ == "__main__":
     renrendm=renren()
     startpage=18
     endpage=1000
-    #renrendm.findCommonPageUrls(startpage,endpage)
-    renrendm.dealcontent()
+    renrendm.main()
+    #renrendm.dealcontent()
     #keyword="金融"
     #answercount=3
     #renrendm.dealquestions(startpage,endpage,keyword,answercount)
